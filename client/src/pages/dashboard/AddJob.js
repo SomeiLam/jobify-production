@@ -2,7 +2,7 @@ import React from 'react';
 import { FormRow, Alert, FormRowSelect } from '../../components';
 import { useAppContext } from '../../context/appContext';
 import Wrapper from '../../assets/wrappers/DashboardFormPage';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const AddJob = () => {
   const {
@@ -17,6 +17,7 @@ const AddJob = () => {
     jobTypeOptions,
     status,
     statusOptions,
+    website,
     handleChange,
     clearValues,
     createJob,
@@ -89,6 +90,13 @@ const AddJob = () => {
             value={jobType}
             handleChange={handleJobInput}
             list={jobTypeOptions}
+          />
+          {/* website */}
+          <FormRow
+            type='text'
+            name='website'
+            value={website}
+            handleChange={handleJobInput}
           />
           {/* btn container */}
           <div className='btn-container'>

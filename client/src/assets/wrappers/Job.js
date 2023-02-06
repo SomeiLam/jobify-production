@@ -100,6 +100,9 @@ const Wrapper = styled.article`
   &:hover .actions {
     visibility: visible;
   }
+  .active {
+    text-decoration: underline;
+  }
 `
 
 export default Wrapper

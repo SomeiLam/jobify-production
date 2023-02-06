@@ -14,16 +14,28 @@ const Job = ({
   jobType,
   status,
   createdAt,
+  website,
 }) => {
   const { setEditJob, deleteJob } = useAppContext();
   let date = moment(createdAt);
   date = date.format('MMM Do, YYYY');
+
+  if (website !== '' && website.startsWith('http')) {
+    website = website.replace(/(^\w+:|^)\/\//, '');
+  }
+
   return (
     <Wrapper>
       <header>
         <div className='main-icon'>{company.charAt(0)}</div>
         <div className='info'>
-          <h5>{position}</h5>
+          <a href={website !== '' && `https://${website}`}
+            target='_blank'
+            rel="noreferrer"
+            className={website !== '' && 'active'}
+          >
+            <h5>{position}</h5>
+          </a>
           <p>{company}</p>
         </div>
       </header>

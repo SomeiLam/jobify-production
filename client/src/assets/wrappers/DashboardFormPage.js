@@ -52,7 +52,8 @@ const Wrapper = styled.section`
       column-gap: 1rem;
     }
     .btn-container {
-      margin-top: 0;
+      margin-top: 1rem;
+      grid-column-end: 3;
     }
   }
   @media (min-width: 1120px) {
@@ -60,7 +61,11 @@ const Wrapper = styled.section`
       grid-template-columns: 1fr 1fr 1fr;
     }
     .form-center button {
-      margin-top: 0;
+      margin-top: 1.5rem;
+    }
+    .btn-container {
+      margin-top: 1rem;
+      grid-column-end: 4;
     }
   }
 `

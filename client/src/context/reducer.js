@@ -84,6 +84,7 @@ const reducer = (state, action) => {
         editJobId: '',
         position: '',
         company: '',
+        website: '',
         jobLocation: state.userLocation,
         jobType: 'full-time',
         status: 'pending',
@@ -113,7 +114,7 @@ const reducer = (state, action) => {
       };
     case SET_EDIT_JOB:
       const job = state.jobs.find((job) => job._id === action.payload.id);
-      const { _id, position, company, jobLocation, jobType, status } = job;
+      const { _id, position, company, jobLocation, jobType, status, website, } = job;
       return {
         ...state,
         isEditing: true,
@@ -123,6 +124,7 @@ const reducer = (state, action) => {
         status,
         jobLocation,
         jobType,
+        website,
       };
     case EDIT_JOB_SUCCESS:
       return {
@@ -132,6 +134,7 @@ const reducer = (state, action) => {
         editJobId: '',
         position: '',
         company: '',
+        website: '',
         status: 'pending',
         jobLocation: state.userLocation ? state.userLocaton : '',
         jobType: 'full-time',
