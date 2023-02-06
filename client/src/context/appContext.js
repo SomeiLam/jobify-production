@@ -176,7 +176,7 @@ const AppProvider = ({ children }) => {
         position, company, jobLocation, jobType, status,
       });
       dispatch({ type: CREATE_JOB_SUCCESS });
-      dispatch({ type: CLEAR_ALERT });
+      dispatch({ type: CLEAR_VALUES });
       return true;
     } catch (error) {
       if (error.response.status !== 401) {

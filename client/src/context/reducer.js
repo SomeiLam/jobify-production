@@ -94,7 +94,7 @@ const reducer = (state, action) => {
         isLoading: false,
         showAlert: true,
         alertType: 'success',
-        alerText: 'New Job Created!',
+        alertText: 'New Job Created!',
       };
     case GET_JOBS_BEGIN:
       return {
