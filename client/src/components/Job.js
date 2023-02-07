@@ -29,10 +29,10 @@ const Job = ({
       <header>
         <div className='main-icon'>{company.charAt(0)}</div>
         <div className='info'>
-          <a href={website !== '' && `https://${website}`}
+          <a href={website !== '' ? `https://${website}` : undefined}
             target='_blank'
             rel="noreferrer"
-            className={website !== '' && 'active'}
+            className={website !== '' ? 'active' : undefined}
           >
             <h5>{position}</h5>
           </a>

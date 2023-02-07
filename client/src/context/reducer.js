@@ -19,6 +19,7 @@ import {
   CHANGE_PAGE,
   GET_CURRENT_USER_BEGIN,
   GET_CURRENT_USER_SUCCESS,
+  SET_LOCATION_OPTIONS,
 } from "./action";
 import { initialState } from "./appContext";
 
@@ -181,6 +182,11 @@ const reducer = (state, action) => {
         user: action.payload.user,
         userLocation: action.payload.location,
         jobLocation: action.payload.location,
+      };
+    case SET_LOCATION_OPTIONS:
+      return {
+        ...state,
+        locationOptions: [''].concat(action.payload.location),
       };
     default:
       throw new Error(`no such action :${action.type}`);

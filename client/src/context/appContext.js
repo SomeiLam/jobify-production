@@ -22,6 +22,7 @@ import {
   CHANGE_PAGE,
   GET_CURRENT_USER_BEGIN,
   GET_CURRENT_USER_SUCCESS,
+  SET_LOCATION_OPTIONS,
 } from "./action";
 
 import reducer from './reducer';
@@ -44,6 +45,7 @@ const initialState = {
   jobType: 'full-time',
   statusOptions: ['pending', 'declined', 'interview'],
   status: 'pending',
+  searchLocation: '',
   website: '',
   jobs: [],
   totalJobs: 0,
@@ -56,6 +58,7 @@ const initialState = {
   searchType: 'all',
   sort: 'latest',
   sortOptions: ['lastest', 'oldest', 'a-z', 'z-a'],
+  locationOptions: [],
 };
 
 const AppContext = React.createContext();
@@ -191,8 +194,8 @@ const AppProvider = ({ children }) => {
   };
 
   const getJobs = async () => {
-    const { page, search, searchStatus, searchType, sort } = state;
-    let url = `/jobs?page=${page}&status=${searchStatus}&jobType=${searchType}&sort=${sort}`;
+    const { page, search, searchStatus, searchType, searchLocation, sort } = state;
+    let url = `/jobs?page=${page}&status=${searchStatus}&jobType=${searchType}&location=${searchLocation}&sort=${sort}`;
     if (search) {
       url = url + `&search=${search}`;
     };
@@ -300,10 +303,25 @@ const AppProvider = ({ children }) => {
     };
   };
 
+  const getLocationOptions = async () => {
+    try {
+      const { data } = await authFetch('/jobs/Locations');
+      dispatch({ type: SET_LOCATION_OPTIONS, payload: { location: data.result } });
+    } catch (error) {
+      if (error.response.status === 401) return;
+      logout();
+    };
+  };
+
   useEffect(() => {
     getCurrentUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    getLocationOptions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.user]);
 
   return (
     <AppContext.Provider value={{

@@ -7,15 +7,16 @@ const SearchContainer = () => {
   const [localSearch, setLocalSearch] = useState('');
   const {
     isLoading,
-    search,
     searchStatus,
     searchType,
     sort,
+    searchLocation,
     sortOptions,
     handleChange,
     clearFilters,
     jobTypeOptions,
     statusOptions,
+    locationOptions,
   } = useAppContext();
 
   const handleSearch = (e) => {
@@ -67,6 +68,13 @@ const SearchContainer = () => {
             value={sort}
             handleChange={handleSearch}
             list={sortOptions}
+          />
+          <FormRowSelect
+            name='searchLocation'
+            labelText='loaction'
+            value={searchLocation}
+            handleChange={handleSearch}
+            list={locationOptions}
           />
           <button
             className='btn btn-block btn-danger'

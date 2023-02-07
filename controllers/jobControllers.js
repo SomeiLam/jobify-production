@@ -27,7 +27,7 @@ const deleteJob = async (req, res) => {
 };
 
 const getAllJobs = async (req, res) => {
-  const { search, status, jobType, sort } = req.query;
+  const { search, status, jobType, location, sort } = req.query;
 
   const queryObject = {
     createdBy: req.user.userId
@@ -44,6 +44,11 @@ const getAllJobs = async (req, res) => {
   if (search) {
     queryObject.position = { $regex: search, $options: 'i' };
   };
+
+  if (location) {
+    queryObject.jobLocation = location;
+  };
+
   // No await
   let result = Job.find(queryObject);
 
@@ -78,6 +83,14 @@ const getAllJobs = async (req, res) => {
 
   res.status(StatusCodes.OK)
     .json({ jobs, totalJobs: totalJobs, numOfPages: numOfPages });
+};
+
+const getLocationList = async (req, res) => {
+  const findQuery = {
+    createdBy: req.user.userId,
+  };
+  const result = await Job.find(findQuery).distinct('jobLocation');
+  res.status(StatusCodes.OK).json({ result });
 };
 
 const updateJob = async (req, res) => {
@@ -165,4 +178,4 @@ const showStats = async (req, res) => {
   res.status(StatusCodes.OK).json({ defaultStats, monthlyApplications });
 };
 
-export { createJob, deleteJob, getAllJobs, updateJob, showStats };
+export { createJob, deleteJob, getAllJobs, getLocationList, updateJob, showStats };
