@@ -232,6 +232,7 @@ const AppProvider = ({ children }) => {
     try {
       await authFetch.delete(`/jobs/${id}`);
       getJobs();
+      getLocationOptions();
     } catch (error) {
       if (error.response.status !== 401) {
         dispatch({
@@ -321,7 +322,7 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     getLocationOptions();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.user]);
+  }, [state.jobs]);
 
   return (
     <AppContext.Provider value={{

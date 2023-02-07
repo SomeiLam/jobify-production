@@ -163,6 +163,7 @@ const reducer = (state, action) => {
         searchStatus: 'all',
         searchType: 'all',
         sort: 'latest',
+        searchLoaction: '',
       };
     case CHANGE_PAGE:
       return {
