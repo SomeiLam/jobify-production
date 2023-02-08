@@ -20,16 +20,18 @@ const Profile = () => {
       displayAlert();
       return;
     };
-    if (isTestUser) {
-      if (name === user.name &&
-        email === user.email &&
-        lastName === user.lastName &&
-        location === user.location &&
-        mode !== darkMode) {
-        setTestDarkMode(mode);
-        toggleDarkMode();
-      } else {
-        updateUser({ name, email, lastName, location, darkMode });
+    if (isTestUser &&
+      name === user.name &&
+      email === user.email &&
+      lastName === user.lastName &&
+      location === user.location &&
+      mode !== darkMode) {
+      setTestDarkMode(mode);
+      toggleDarkMode();
+    } else {
+      updateUser({ name, email, lastName, location, darkMode: mode });
+      if (mode !== darkMode) {
+        window.location.reload(false);
       }
     }
   };
