@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { Logo, FormRow, Alert } from '../components';
+import { Logo, FormRow, Alert, Checkbox } from '../components';
 import Wrapper from '../assets/wrappers/RegisterPage';
 import { useAppContext } from '../context/appContext';
 
@@ -22,6 +22,12 @@ const Register = () => {
     setupUser,
   } = useAppContext();
 
+  const [remember, setRemember] = useState(false);
+
+  const handleCheckChange = () => {
+    setRemember(!remember);
+  };
+
   const toggleMember = () => {
     setValues({ ...values, isMember: !values.isMember });
   };
@@ -37,7 +43,7 @@ const Register = () => {
       displayAlert();
       return;
     };
-    const currentUser = { name, email, password };
+    const currentUser = { name, email, password, remember };
     if (isMember) {
       setupUser(currentUser, 'login', 'Login Successfully! Redirecting...');
     } else {
@@ -76,6 +82,11 @@ const Register = () => {
           value={values.password}
           name='password'
           handleChange={handleChange}
+        />
+        <Checkbox
+          label="remember me"
+          value={remember}
+          onChange={handleCheckChange}
         />
         <button
           type='submit'

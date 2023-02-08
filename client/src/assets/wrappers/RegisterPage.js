@@ -31,5 +31,49 @@ const Wrapper = styled.section`
     cursor: pointer;
     letter-spacing: var(--letterSpacing);
   }
+  .checkbox {
+    display: block;
+    position: relative;
+    padding-left: 2.5rem;
+    
+    label {
+      text-transform: capitalize;
+    }
+
+    input[type=checkbox] {
+      visibility: hidden;
+    }
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 25px;
+      width: 25px;
+      border: 1px solid var(--grey-200);
+    }
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+    input:checked ~ .checkmark:after {
+      display: block;
+    }
+    .checkmark:after {
+      left: 8px;
+      bottom: 5px;
+      width: 6px;
+      height: 12px;
+      border: solid var(--primary-500);
+      border-width: 0 2px 2px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+    span {
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  }
 `
 export default Wrapper

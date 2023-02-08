@@ -69,6 +69,9 @@ const Wrapper = styled.section`
   .small-text {
     font-size: 0.875em;
     margin-top: 2rem;
+    color: ${props => {
+    return props.dark ? `var(--darkModeTextColor)` : `var(--black)`
+  }};
   }
   @media (min-width: 992px) {
     .form-center {

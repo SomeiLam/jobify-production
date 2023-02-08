@@ -14,6 +14,7 @@ import ChartContainer from './ChartContainer';
 import Loading from './Loading';
 import BarChart from './BarChart';
 import AreaChart from './AreaChart';
+import Checkbox from './Checkbox';
 
 export {
   Logo,
@@ -31,5 +32,6 @@ export {
   ChartContainer,
   Loading,
   BarChart,
-  AreaChart
+  AreaChart,
+  Checkbox,
 };

@@ -12,6 +12,7 @@ const Profile = () => {
   const [location, setLocation] = useState(user?.location);
   const [mode, setMode] = useState(darkMode);
   const [testDarkMode, setTestDarkMode] = useState(darkMode);
+  const isTestUser = user.email === 'testuser@test.com';
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -19,7 +20,7 @@ const Profile = () => {
       displayAlert();
       return;
     };
-    if (user.email === 'testuser@test.com') {
+    if (isTestUser) {
       if (name === user.name &&
         email === user.email &&
         lastName === user.lastName &&
@@ -83,7 +84,8 @@ const Profile = () => {
           </button>
         </div>
       </form>
-      <h6 className='small-text'>Test User can only change Display Mode.</h6>
+      {isTestUser &&
+        <h6 className='small-text'>Test User can only change Display Mode.</h6>}
     </Wrapper>
   )
 }
