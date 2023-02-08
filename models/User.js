@@ -38,6 +38,10 @@ const UserSchema = new mongoose.Schema({
     trim: true,
     default: 'my city',
   },
+  darkMode: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 UserSchema.pre('save', async function () {

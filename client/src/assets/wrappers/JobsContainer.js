@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 
 const Wrapper = styled.section`
+  color: ${props => {
+    return props.dark ? `var(--darkModeTextColor)` : `var(--textColor)`
+  }};
   margin-top: 4rem;
   h2 {
     text-transform: none;

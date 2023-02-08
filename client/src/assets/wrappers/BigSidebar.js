@@ -6,7 +6,9 @@ const Wrapper = styled.aside`
     display: block;
     box-shadow: 1px 0px 0px 0px rgba(0, 0, 0, 0.1);
     .sidebar-container {
-      background: var(--white);
+      background: ${props => {
+    return props.dark ? `var(--dark-mode)` : `var(--white)`
+  }};
       min-height: 100vh;
       height: 100%;
       width: 250px;
@@ -34,16 +36,22 @@ const Wrapper = styled.aside`
     .nav-link {
       display: flex;
       align-items: center;
-      color: var(--grey-500);
+      color: ${props => {
+    return props.dark ? `var(--grey-300)` : `var(--grey-500)`
+  }};
       padding: 1rem 0;
       padding-left: 2.5rem;
       text-transform: capitalize;
       transition: var(--transition);
     }
     .nav-link:hover {
-      background: var(--grey-50);
+      background: ${props => {
+    return props.dark ? `var(--primary-900)` : `var(--grey-50)`
+  }};
       padding-left: 3rem;
-      color: var(--grey-900);
+      color: ${props => {
+    return props.dark ? `var(--primary-500)` : `var(--grey-900)`
+  }};
     }
     .nav-link:hover .icon {
       color: var(--primary-500);
@@ -56,7 +64,9 @@ const Wrapper = styled.aside`
       transition: var(--transition);
     }
     .active {
-      color: var(--grey-900);
+      color: ${props => {
+    return props.dark ? `var(--primary-400)` : `var(--grey-900)`
+  }};
     }
     .active .icon {
       color: var(--primary-500);

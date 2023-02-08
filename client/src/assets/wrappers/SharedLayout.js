@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 
 const Wrapper = styled.section`
+  background: ${props => {
+    return props.dark ? `var(--darkModeBackgroundColor)` : `var(--backgroundColor)`
+  }};
   .dashboard {
     display: grid;
     grid-template-columns: 1fr;

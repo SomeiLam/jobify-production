@@ -1,7 +1,9 @@
 import styled from 'styled-components'
 
 const Wrapper = styled.article`
-  background: var(--white);
+  background: ${props => {
+    return props.dark ? `var(--darkModeThirdBackgroundColor)` : `var(--white)`
+  }};
   border-radius: var(--borderRadius);
   display: grid;
   grid-template-rows: 1fr auto;
@@ -102,6 +104,7 @@ const Wrapper = styled.article`
   }
   .active {
     text-decoration: underline;
+    color: var(--darkModeTextColor);
   }
 `
 

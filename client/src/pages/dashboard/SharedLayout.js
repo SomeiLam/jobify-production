@@ -1,16 +1,18 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom';
+import { useAppContext } from '../../context/appContext';
 import Wrapper from '../../assets/wrappers/SharedLayout';
 import { Navbar, BigSidebar, SmallSidebar } from '../../components';
 
 const SharedLayout = () => {
+  const { darkMode } = useAppContext();
   return (
-    <Wrapper>
+    <Wrapper dark={darkMode}>
       <main className='dashboard'>
-        <SmallSidebar />
-        <BigSidebar />
+        <SmallSidebar dark={darkMode} />
+        <BigSidebar dark={darkMode} />
         <div>
-          <Navbar />
+          <Navbar dark={darkMode} />
           <div className='dashboard-page'>
             <Outlet />
           </div>

@@ -20,7 +20,9 @@ const Wrapper = styled.aside`
     opacity: 1;
   }
   .content {
-    background: var(--white);
+    background: ${props => {
+    return props.dark ? `var(--black)` : `var(--white)`
+  }};
     width: var(--fluid-width);
     height: 95vh;
     border-radius: var(--borderRadius);
@@ -48,13 +50,17 @@ const Wrapper = styled.aside`
   .nav-link {
     display: flex;
     align-items: center;
-    color: var(--grey-500);
+    color: ${props => {
+    return props.dark ? `var(--darkModeTextColor)` : `var(--grey-500)`
+  }};
     padding: 1rem 0;
     text-transform: capitalize;
     transition: var(--transition);
   }
   .nav-link:hover {
-    color: var(--grey-900);
+    color: ${props => {
+    return props.dark ? `var(--primary-400)` : `var(--grey-900)`
+  }};
   }
   .nav-link:hover .icon {
     color: var(--primary-500);
@@ -67,7 +73,9 @@ const Wrapper = styled.aside`
     transition: var(--transition);
   }
   .active {
-    color: var(--grey-900);
+    color: ${props => {
+    return props.dark ? `var(--primary-400)` : `var(--grey-900)`
+  }};
   }
   .active .icon {
     color: var(--primary-500);

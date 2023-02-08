@@ -14,6 +14,9 @@ const Wrapper = styled.section`
   h4 {
     text-align: center;
     margin-bottom: 0.75rem;
+    color: ${props => {
+    return props.dark ? `var(--darkModeTextColor)` : `var(--textColor)`
+  }};
   }
 `
 

@@ -5,7 +5,7 @@ import Wrapper from '../assets/wrappers/StatsContainer';
 import StatsItem from './StatsItem';
 
 const StatsContainer = () => {
-  const { stats } = useAppContext();
+  const { stats, darkMode } = useAppContext();
   const defaultStats = [
     {
       title: 'pending applications',
@@ -32,7 +32,7 @@ const StatsContainer = () => {
   return (
     <Wrapper>
       {defaultStats.map((item, index) => {
-        return <StatsItem key={index} {...item} />
+        return <StatsItem key={index} {...item} dark={darkMode} />
       })}
     </Wrapper>
   )

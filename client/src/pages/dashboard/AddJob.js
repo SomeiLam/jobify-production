@@ -22,6 +22,7 @@ const AddJob = () => {
     clearValues,
     createJob,
     editJob,
+    darkMode,
   } = useAppContext();
   const navigate = useNavigate();
 
@@ -49,7 +50,7 @@ const AddJob = () => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper dark={darkMode}>
       <form className='form'>
         <h3>{isEditing ? 'edit job' : 'add job'}</h3>
         {showAlert && <Alert />}

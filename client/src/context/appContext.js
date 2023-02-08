@@ -14,6 +14,7 @@ import {
   CREATE_JOB_SUCCESS,
   GET_JOBS_BEGIN,
   GET_JOBS_SUCCESS,
+  SET_PAGE,
   SET_EDIT_JOB,
   EDIT_JOB_SUCCESS,
   SHOW_STATUS_BEGIN,
@@ -23,6 +24,7 @@ import {
   GET_CURRENT_USER_BEGIN,
   GET_CURRENT_USER_SUCCESS,
   SET_LOCATION_OPTIONS,
+  TOGGLE_TEST_USER_DARK_MODE,
 } from "./action";
 
 import reducer from './reducer';
@@ -51,6 +53,7 @@ const initialState = {
   totalJobs: 0,
   numOfPages: 1,
   page: 1,
+  previousPage: 1,
   stats: {},
   monthlyApplications: [],
   search: '',
@@ -120,10 +123,10 @@ const AppProvider = ({ children }) => {
     dispatch({ type: FETCH_BEGIN });
     try {
       const response = await axios.post(`/api/v1/auth/${endpoint}`, currentUser);
-      const { user, location } = response.data;
+      const { user, location, darkMode } = response.data;
       dispatch({
         type: SETUP_USER_SUCCESS,
-        payload: { user, location, msg: alertText }
+        payload: { user, location, darkMode, msg: alertText }
       });
       // addUserToLoaclStorage({ user, token, location });
     } catch (error) {
@@ -144,10 +147,10 @@ const AppProvider = ({ children }) => {
   const updateUser = async (currentUser) => {
     try {
       const { data } = await authFetch.patch('/auth/updateUser', currentUser);
-      const { user, location } = data;
+      const { user, location, darkMode } = data;
       dispatch({
         type: SETUP_USER_SUCCESS,
-        payload: { user, location, msg: 'User Profile Updated!' }
+        payload: { user, location, darkMode, msg: 'User Profile Updated!' }
       });
       // addUserToLoaclStorage({ user, token, location });
     } catch (error) {
@@ -194,8 +197,11 @@ const AppProvider = ({ children }) => {
   };
 
   const getJobs = async () => {
-    const { page, search, searchStatus, searchType, searchLocation, sort } = state;
-    let url = `/jobs?page=${page}&status=${searchStatus}&jobType=${searchType}&location=${searchLocation}&sort=${sort}`;
+    const { page, search, searchStatus, searchType, searchLocation, sort, previousPage } = state;
+    let url = `/jobs?page=${page}&status=${searchStatus}&jobType=${searchType}&sort=${sort}`;
+    if (searchLocation) {
+      url = url + `&location=${searchLocation}`;
+    };
     if (search) {
       url = url + `&search=${search}`;
     };
@@ -212,6 +218,17 @@ const AppProvider = ({ children }) => {
           numOfPages,
         },
       });
+      if (previousPage !== page) {
+        dispatch({
+          type: SET_PAGE,
+          payload: { page: page }
+        });
+      } else {
+        dispatch({
+          type: SET_PAGE,
+          payload: { page: 1 }
+        });
+      }
     } catch (error) {
       if (error.response.status !== 401) {
         dispatch({
@@ -293,10 +310,10 @@ const AppProvider = ({ children }) => {
     dispatch({ type: GET_CURRENT_USER_BEGIN });
     try {
       const { data } = await authFetch('/auth/getCurrentUser');
-      const { user, location } = data;
+      const { user, location, darkMode } = data;
       dispatch({
         type: GET_CURRENT_USER_SUCCESS,
-        payload: { user, location },
+        payload: { user, location, darkMode },
       });
     } catch (error) {
       if (error.response.status === 401) return;
@@ -312,6 +329,10 @@ const AppProvider = ({ children }) => {
       if (error.response.status === 401) return;
       logout();
     };
+  };
+
+  const toggleDarkMode = () => {
+    dispatch({ type: TOGGLE_TEST_USER_DARK_MODE });
   };
 
   useEffect(() => {
@@ -343,6 +364,7 @@ const AppProvider = ({ children }) => {
       clearFilters,
       changePage,
       getCurrentUser,
+      toggleDarkMode,
     }}>
       {children}
     </AppContext.Provider>

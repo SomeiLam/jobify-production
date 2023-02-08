@@ -1,8 +1,10 @@
 import styled from 'styled-components'
 
 const Wrapper = styled.article`
+  background: ${props => {
+    return props.dark ? 'var(--darkModeSecondaryBackgroundColor)' : `var(--white)`
+  }};
   padding: 2rem;
-  background: var(--white);
   border-radius: var(--borderRadius);
   border-bottom: 5px solid ${(props) => props.color};
   header {

@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { FormRow, Alert } from '../../components';
+import { FormRow, Alert, FormRowSelect } from '../../components';
 import { useAppContext } from '../../context/appContext';
 import Wrapper from '../../assets/wrappers/DashboardFormPage';
 
 const Profile = () => {
-  const { user, showAlert, displayAlert, updateUser, isLoading } =
+  const { user, showAlert, displayAlert, updateUser, isLoading, darkMode, toggleDarkMode } =
     useAppContext();
   const [name, setName] = useState(user?.name);
   const [email, setEmail] = useState(user?.email);
   const [lastName, setLastName] = useState(user?.lastName);
   const [location, setLocation] = useState(user?.location);
+  const [mode, setMode] = useState(darkMode);
+  const [testDarkMode, setTestDarkMode] = useState(darkMode);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -17,11 +19,22 @@ const Profile = () => {
       displayAlert();
       return;
     };
-    updateUser({ name, email, lastName, location });
-  }
+    if (user.email === 'testuser@test.com') {
+      if (name === user.name &&
+        email === user.email &&
+        lastName === user.lastName &&
+        location === user.location &&
+        mode !== darkMode) {
+        setTestDarkMode(mode);
+        toggleDarkMode();
+      } else {
+        updateUser({ name, email, lastName, location, darkMode });
+      }
+    }
+  };
 
   return (
-    <Wrapper>
+    <Wrapper dark={testDarkMode}>
       <form className='form' onSubmit={handleSubmit}>
         <h3>profile</h3>
         {showAlert && <Alert />}
@@ -51,6 +64,16 @@ const Profile = () => {
             value={location}
             handleChange={e => setLocation(e.target.value)}
           />
+          <FormRowSelect
+            name='darkMode'
+            labelText='display'
+            value={mode ? 'Dark Mode' : 'Light Mode'}
+            handleChange={e => {
+              e.target.value === 'Dark Mode' && setMode(true);
+              e.target.value === 'Light Mode' && setMode(false);
+            }}
+            list={['Dark Mode', 'Light Mode']}
+          />
           <button
             className='btn btn-block'
             type='submit'
@@ -60,6 +83,7 @@ const Profile = () => {
           </button>
         </div>
       </form>
+      <h6 className='small-text'>Test User can only change Display Mode.</h6>
     </Wrapper>
   )
 }

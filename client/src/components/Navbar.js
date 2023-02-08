@@ -6,9 +6,9 @@ import Wrapper from '../assets/wrappers/Navbar';
 
 const Navbar = () => {
   const [showLogout, setShowLogout] = useState(false);
-  const { user, toggleSidebar, logout } = useAppContext();
+  const { user, toggleSidebar, logout, darkMode } = useAppContext();
   return (
-    <Wrapper>
+    <Wrapper dark={darkMode}>
       <div className='nav-center'>
         <button
           type='button'

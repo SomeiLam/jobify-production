@@ -26,7 +26,9 @@ const Wrapper = styled.nav`
     display: flex;
     align-items: center;
   }
-  background: var(--white);
+  background: ${props => {
+    return props.dark ? `var(--dark-mode)` : `var(--white)`
+  }};
   .btn-container {
     position: relative;
   }
@@ -78,6 +80,9 @@ const Wrapper = styled.nav`
     }
     .logo-text {
       display: block;
+      color: ${props => {
+    return props.dark ? `var(--darkModeTextColor)` : `var(--textColor)`
+  }};
     }
   }
 `

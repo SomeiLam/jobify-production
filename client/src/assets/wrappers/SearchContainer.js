@@ -4,6 +4,12 @@ const Wrapper = styled.section`
   .form {
     width: 100%;
     max-width: 100%;
+    color: ${props => {
+    return props.dark ? `var(--darkModeTextColor)` : `var(--textColor)`
+  }};
+    background: ${props => {
+    return props.dark ? `var(--darkModeThirdBackgroundColor)` : `var(--white)`
+  }};
   }
   .form-input,
   .form-select,
@@ -12,6 +18,14 @@ const Wrapper = styled.section`
   }
   .form-row {
     margin-bottom: 0;
+    input, select {
+      background-color: ${props => {
+    return props.dark ? `var(--darkModeBackgroundColor)` : `var(--white)`
+  }};
+      color: ${props => {
+    return props.dark ? `var(--darkModeTextColor)` : `var(--black)`
+  }};
+    }
   }
   .form-center {
     display: grid;

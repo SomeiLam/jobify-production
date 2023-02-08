@@ -3,11 +3,16 @@ import styled from 'styled-components'
 const Wrapper = styled.section`
   border-radius: var(--borderRadius);
   width: 100%;
-  background: var(--white);
+  background: ${props => {
+    return props.dark ? `var(--darkModeThirdBackgroundColor)` : `var(--white)`
+  }};
   padding: 3rem 2rem 4rem;
   box-shadow: var(--shadow-2);
   h3 {
     margin-top: 0;
+    color: ${props => {
+    return props.dark ? `var(--darkModeTextColor)` : `var(--textColor)`
+  }};
   }
   .form {
     margin: 0;
@@ -16,9 +21,23 @@ const Wrapper = styled.section`
     padding: 0;
     max-width: 100%;
     width: 100%;
+    color: ${props => {
+    return props.dark ? `var(--darkModeTextColor)` : `var(--textColor)`
+  }};
+    background: ${props => {
+    return props.dark ? `var(--darkModeThirdBackgroundColor)` : `var(--white)`
+  }};
   }
   .form-row {
     margin-bottom: 0;
+    input, select {
+      background-color: ${props => {
+    return props.dark ? `var(--darkModeBackgroundColor)` : `var(--white)`
+  }};
+      color: ${props => {
+    return props.dark ? `var(--darkModeTextColor)` : `var(--black)`
+  }};
+    }
   }
   .form-center {
     display: grid;
@@ -43,7 +62,13 @@ const Wrapper = styled.section`
     background: var(--grey-500);
   }
   .clear-btn:hover {
-    background: var(--black);
+    background: ${props => {
+    return props.dark ? `var(--darkModeTextColor)` : `var(--black)`
+  }};
+  }
+  .small-text {
+    font-size: 0.875em;
+    margin-top: 2rem;
   }
   @media (min-width: 992px) {
     .form-center {

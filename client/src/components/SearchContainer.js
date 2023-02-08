@@ -3,7 +3,7 @@ import { FormRow, FormRowSelect } from '.';
 import { useAppContext } from '../context/appContext';
 import Wrapper from '../assets/wrappers/SearchContainer';
 
-const SearchContainer = () => {
+const SearchContainer = ({ dark }) => {
   const [localSearch, setLocalSearch] = useState('');
   const {
     isLoading,
@@ -39,7 +39,7 @@ const SearchContainer = () => {
   const optimizedDebounce = useMemo(() => debounce(), []);
 
   return (
-    <Wrapper>
+    <Wrapper dark={dark}>
       <form className='form'>
         <h4>search form</h4>
         <div className='form-center'>

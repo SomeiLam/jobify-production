@@ -5,10 +5,10 @@ import Logo from './Logo';
 import NavLinks from './NavLinks';
 import Wrapper from '../assets/wrappers/SmallSidebar';
 
-const SmallSidebar = () => {
+const SmallSidebar = ({ dark }) => {
   const { showSidebar, toggleSidebar } = useAppContext();
   return (
-    <Wrapper>
+    <Wrapper dark={dark}>
       <div className={showSidebar ? 'sidebar-container show-sidebar' : 'sidebar-container'}>
         <div className='content'>
           <button
@@ -21,7 +21,7 @@ const SmallSidebar = () => {
           <header>
             <Logo />
           </header>
-          <NavLinks toggleSidebar={toggleSidebar} />
+          <NavLinks toggleSidebar={toggleSidebar} dark={dark} />
         </div>
       </div>
     </Wrapper>

@@ -5,10 +5,10 @@ import Logo from './Logo';
 import Wrapper from '../assets/wrappers/BigSidebar';
 
 const BigSidebar = () => {
-  const { showSidebar } = useAppContext();
+  const { showSidebar, darkMode } = useAppContext();
 
   return (
-    <Wrapper>
+    <Wrapper dark={darkMode}>
       <div
         className={
           showSidebar ? 'sidebar-container show-sidebar' : 'sidebar-container'

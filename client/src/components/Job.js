@@ -15,6 +15,7 @@ const Job = ({
   status,
   createdAt,
   website,
+  dark
 }) => {
   const { setEditJob, deleteJob } = useAppContext();
   let date = moment(createdAt);
@@ -25,7 +26,7 @@ const Job = ({
   }
 
   return (
-    <Wrapper>
+    <Wrapper dark={dark}>
       <header>
         <div className='main-icon'>{company.charAt(0)}</div>
         <div className='info'>

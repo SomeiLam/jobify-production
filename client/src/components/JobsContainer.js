@@ -6,7 +6,7 @@ import Alert from './Alert';
 import Wrapper from '../assets/wrappers/JobsContainer';
 import PageBtnContainer from './PageBtnContainer';
 
-const JobsContainer = () => {
+const JobsContainer = ({ dark }) => {
   const {
     getJobs,
     jobs,
@@ -23,6 +23,7 @@ const JobsContainer = () => {
   } = useAppContext();
 
   useEffect(() => {
+    console.log('26', page, search, searchStatus, searchType, searchLocation, sort)
     getJobs();
     // eslint-disable-next-line
   }, [page, search, searchStatus, searchType, searchLocation, sort]);
@@ -32,21 +33,21 @@ const JobsContainer = () => {
   };
 
   if (jobs.length === 0) {
-    return <Wrapper>
+    return <Wrapper dark={dark}>
       <h2>No jobs to display...</h2>
     </Wrapper>
   }
 
   return (
-    <Wrapper>
+    <Wrapper dark={dark}>
       {showAlert && <Alert />}
       <h5>{totalJobs} job{jobs.length > 1 && 's'} found </h5>
       <div className='jobs'>
         {jobs.map((job) =>
-          <Job key={job._id} {...job} />
+          <Job key={job._id} {...job} dark={dark} />
         )}
       </div>
-      {numOfPages > 0 && <PageBtnContainer />}
+      {numOfPages > 0 && <PageBtnContainer dark={dark} />}
     </Wrapper>
   );
 };

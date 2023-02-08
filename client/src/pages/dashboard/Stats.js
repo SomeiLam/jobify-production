@@ -3,7 +3,7 @@ import { useAppContext } from '../../context/appContext';
 import { StatsContainer, Loading, ChartContainer } from '../../components';
 
 const Stats = () => {
-  const { showStats, isLoading, monthlyApplications } = useAppContext();
+  const { showStats, isLoading, monthlyApplications, darkMode } = useAppContext();
 
   useEffect(() => {
     showStats();
@@ -14,7 +14,7 @@ const Stats = () => {
 
   return (
     <>
-      <StatsContainer />
+      <StatsContainer dark={darkMode} />
       {monthlyApplications.length > 0 && <ChartContainer />}
     </>
   )

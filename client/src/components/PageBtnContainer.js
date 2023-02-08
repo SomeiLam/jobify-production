@@ -4,7 +4,7 @@ import Wrapper from '../assets/wrappers/PageBtnContainer';
 import { useAppContext } from '../context/appContext';
 
 
-const PageBtnContainer = () => {
+const PageBtnContainer = ({ dark }) => {
   const { numOfPages, page, changePage } = useAppContext();
 
   const nextPage = () => {
@@ -28,7 +28,7 @@ const PageBtnContainer = () => {
   });
 
   return (
-    <Wrapper>
+    <Wrapper dark={dark}>
       <button
         className='prev-btn'
         onClick={prevPage}

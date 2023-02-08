@@ -23,8 +23,8 @@ const register = async (req, res) => {
       location: user.location,
       name: user.name,
     },
-
     location: user.location,
+    darkMode: user.darkMode,
   });
 };
 const login = async (req, res) => {
@@ -45,10 +45,10 @@ const login = async (req, res) => {
   attachCookie({ res, token });
   user.password = undefined;
 
-  res.status(StatusCodes.OK).json({ user, location: user.location });
+  res.status(StatusCodes.OK).json({ user, location: user.location, darkMode: user.darkMode });
 };
 const updateUser = async (req, res) => {
-  const { email, name, lastName, location } = req.body;
+  const { email, name, lastName, location, darkMode } = req.body;
   if (!email || !name || !lastName || !location) {
     throw new BadRequestError('Please provide all values');
   }
@@ -58,18 +58,19 @@ const updateUser = async (req, res) => {
   user.name = name;
   user.lastName = lastName;
   user.location = location;
+  user.darkMode = darkMode;
 
   await user.save();
 
   const token = user.createJWT();
   attachCookie({ res, token });
 
-  res.status(StatusCodes.OK).json({ user, location: user.location });
+  res.status(StatusCodes.OK).json({ user, location: user.location, darkMode: user.darkMode });
 };
 
 const getCurrentUser = async (req, res) => {
   const user = await User.findOne({ _id: req.user.userId });
-  res.status(StatusCodes.OK).json({ user, location: user.location });
+  res.status(StatusCodes.OK).json({ user, location: user.location, darkMode: user.darkMode });
 };
 
 const logout = async (req, res) => {
